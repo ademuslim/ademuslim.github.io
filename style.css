@@ -1,0 +1,1163 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* Darkmode default */
+:root {
+    --text: #F5F5F5;
+    --background: #151515;
+    --accent: #ffc800;
+    --accent-menu: #0056e0;
+    transition: background-color 0.7s, color 0.7s;
+}
+.light-mode {
+    --text: #151515;
+    --background: #F5F5F5;
+    --accent: #0056e0;
+    --accent-menu: #ffc800;
+}
+
+
+body {
+    width: 100vw;
+    background-color: var(--background);
+    color: var(--text);
+    overflow-x: hidden; 
+    font-family: 'Roboto Mono', monospace;
+    transition: background-color 0.7s, color 0.7s;
+}
+.hidden {
+    display: none;
+}
+::selection {
+    color: var(--background); /* Warna teks saat di-highlight/blok */
+    background-color: var(--text); /* Warna latar belakang saat di-highlight/blok */
+}
+::-moz-selection {
+color: var(--background);
+background-color: var(--text);
+}
+/* Warna scrollbar */
+::-webkit-scrollbar {
+    width: 4px; /* Ukuran scrollbar */
+}
+/* Warna thumb scrollbar */
+::-webkit-scrollbar-thumb {
+    background-color: var(--text); /* Warna atas */
+    border-bottom: 80px solid var(--background); /* Garis pemisah warna atas dan tengah */
+    border-top: 80px solid var(--background); /* Garis pemisah warna tengah dan bawah */
+}
+::-webkit-scrollbar-track {
+    background-color: var(--background); /* Warna track scrollbar */
+}
+
+
+/* Navbar */
+nav {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px 10px;
+    font-family: 'Roboto Mono', monospace;
+    color: var(--text);
+    background-color: var(--background);
+    transition: background-color 0.5s ease; /* Transisi warna latar belakang */
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+}
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.sticky {
+    position: fixed;
+    top: 0;
+    background-color: rgba(21, 21, 21, 0.2);
+    width: 100%;
+    z-index: 1000;
+    animation: slideDown 0.5s ease-in-out;
+}
+nav .branding a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+}
+#desktop-menu {
+    display: flex;
+    list-style-type: none;
+    width: 400px;
+    /* counter-reset: menuCounter; Inisialisasi counter */
+    letter-spacing: -1px;
+}
+#desktop-menu li {
+    /* counter-increment: menuCounter; Increment counter pada setiap item li */
+    margin-left: 35px;
+    position: relative;
+}
+#desktop-menu .arrow-menu {
+    font-size: 1.5rem;
+    font-family: 'Fira Code', monospace;
+    vertical-align: middle;
+    margin-right: 2px;
+    cursor: pointer;
+    position: relative; /* Membuat arrow-menu sebagai konteks posisi untuk penempatan absolut */
+    top: 1px; /* Menyesuaikan nilai top untuk memindahkannya ke bawah */
+    color: var(--accent);
+}
+.link-menu {
+    vertical-align: middle;
+}
+/* #desktop-menu li a span.link-menu::before {
+    content: "0" counter(menuCounter); Menambahkan counter ke teks
+    position: absolute;
+    top: -16px; Mengatur posisi di atas link
+    right: 0;
+    color: grey;
+    font-size: 12px;
+} */
+.theme-mode {
+    cursor: pointer;
+}
+#desktop-menu li a {
+    text-decoration: none;
+    position: relative;
+    color: var(--text);
+    font-weight: 500;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+#desktop-menu li a:hover {
+    color: var(--text); /* Warna saat di-hover */
+}
+#desktop-menu:hover li a:not(:hover) {
+    color: grey; /* Warna saat tidak di-hover ketika ada yang di-hover */
+}
+#desktop-menu li a:hover .arrow-menu {
+    color: var(--accent);
+}
+#desktop-menu:hover li a:not(:hover) .arrow-menu {
+    color: grey; /* Warna saat tidak di-hover ketika ada yang di-hover */
+}
+/* Animasi hover */
+@keyframes blink {
+    0%, 100% {
+    opacity: 1;
+    }
+    50% {
+    opacity: 0;
+    }
+}
+/* Gaya saat dihover */
+#desktop-menu li:hover span.link-menu::after {
+    content: '';
+    position: absolute;
+    bottom: 7px;
+    right: -12px;
+    width: 10px;
+    height: 2px;
+    background-color: var(--accent);
+    animation: blink 1s infinite;
+}
+#desktop-menu li span.link-menu::after {
+    content: ""; /* Konten "_" akan ditambahkan saat dihover */
+    position: absolute;
+    bottom: 5px;
+    font-weight: 500;
+    right: -10px;
+}
+
+
+/* Menyembunyikan elemen di layar besar*/
+.button,
+.menu-title,
+.mobile-menu {
+    display: none;
+}
+
+.bio-mobile-screen,
+.moto-mobile-screen {
+    display: none !important;
+}
+
+
+/* Media query untuk layar kecil */
+@media (max-width: 767px) {
+    
+    /* Menyembunyikan elemen di layar kecil */
+    #desktop-menu {
+        display: none;
+    }
+    .bio-desktop-screen,
+    .moto-desktop-screen {
+        display: none !important;
+    }
+
+    nav {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        padding: 12px;
+        max-height: 60px;
+        overflow: hidden;
+        transition: max-height 1s ease; /* Menambahkan transition pada max-height */
+    }
+    nav .branding {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    nav.-mobile-menu-open {
+        background-color: var(--text);
+        color: var(--background);
+        max-height: 800px; /* Sesuaikan dengan nilai maksimum yang diinginkan saat menu tampil */
+        transition: max-height 1s ease; /* Tambahkan transition pada max-height */
+    }
+    nav.-mobile-menu-open .branding a {
+        color: var(--background);
+    }
+    .mobile-menu {
+        display: none;
+        list-style-type: none;
+    }
+    .mobile-menu.-open {
+        display: flex;
+        position: relative;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+    }
+    
+    .button {
+        display: flex; /* Default: hide on large screens */
+        box-sizing: border-box;
+        cursor: pointer;
+        z-index: 99;
+        svg {
+            stroke: var(--text);
+            transition: .2s;
+            
+            g {
+            &:first-child {
+                opacity: 1;
+                transition: opacity 0s .2s;
+                
+                line {
+                transition: transform .2s .2s;
+                transform: translateY(0px);
+                }
+            }
+            
+            &:last-child {
+                opacity: 0;
+                transition: opacity 0s .2s;
+                
+                line {
+                transition: transform .2s;
+                transform: rotate(0deg);
+                transform-origin: center;
+                }
+            }
+            }
+        }
+        
+        &.-mobile-menu-open svg {
+            stroke: var(--background);
+            
+            g {
+            &:first-child {
+                opacity: 0;
+                
+                line {
+                transition: transform .2s;
+                
+                &:first-child {
+                    transform: translateY(7px);
+                }
+                
+                &:last-child {
+                    transform: translateY(-7px);
+                }
+                }
+            }
+            
+            &:last-child {
+                opacity: 1;
+                
+                line {
+                transition: transform .2s .2s;
+
+                &:first-child {
+                    transform: rotate(45deg);
+                }
+                
+                &:last-child {
+                    transform: rotate(-45deg);
+                }
+                }
+            }
+            }  
+        }
+        /* Atur warna latar belakang .nav sesuai kebutuhan Anda */
+    }
+
+    .menu-title,
+    .mobile-menu li:last-child {
+        display: flex;
+        align-items: center;
+        height: 30px;
+    }
+    .mobile-menu li {
+        display: flex;
+        align-items: center;
+        height: 37px;
+    }
+    .mobile-menu .link-menu {
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    
+    .mobile-menu li a {
+        margin-left: 6px;
+        text-decoration: none;
+        color: var(--background);
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+    .menu-title p   {
+        margin-left: 6px;
+    }
+    .mobile-menu li .link-menu svg {
+        margin-left: 52px;
+    }
+    
+    .mobile-menu .menu-title p {
+        margin-left: 46px;
+    }
+    .mobile-menu li:last-child .link-menu .theme-mode {
+        margin-left: 92px;
+    }
+    span.link-menu svg {
+        width: 34px;
+        height: 34px;
+    }
+    .mobile-menu li:last-child {
+        position: relative;
+    }
+
+    .mobile-menu li:last-child .link-menu svg,
+    span.menu-title svg {
+        position: absolute;
+        top: 0;
+        width: 34px;
+        height: 17px;
+    }
+    span.menu-title svg {
+        left: 6px;
+    }
+
+    #home {
+        flex-direction: column;
+        gap: 2px !important;
+    }
+    section {
+        padding: 70px 10px 10px !important;
+    }
+
+    .intro {
+        width: 287.33px !important;
+    }
+
+    .intro .name {
+        font-size: 2rem !important;
+    }
+
+    /* Typing Efect Name */
+    .typingContentName{
+        animation: typingNameMobileScreen 1s steps(10) 6s forwards !important; /*Jumlah huruf konten*/
+    }
+    .typingContainerName::before{
+        bottom: 6px !important;
+        }
+    @keyframes typingNameMobileScreen {
+        0%{
+            width: 0;
+        }
+        100%{
+            width: 192.03px; /*Panjang konten*/
+        }
+        
+    }
+
+    .bio-mobile-screen,
+    .moto-mobile-screen {
+        display: block !important;
+    }
+
+    .typingContainerBioMS1,
+    .typingContainerBioMS2,
+    .typingContainerBioMS3,
+    .typingContainerMotoMS1,
+    .typingContainerMotoMS2 {
+        display: inline-block;
+        position: relative;
+    }
+
+    /* Typing Efect Bio Mobile Screen */
+    .typingContentBioMS1{
+        position: relative;
+        display: inline-block;
+        animation: typingBioMS1 2.5s steps(25) 9s forwards;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+    }
+    .typingContainerBioMS1::before{
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        right: -10px;
+        width: 10px;
+        height: 2px;
+        opacity: 0;
+        background-color: var(--accent);
+        animation: blinkCursor .5s steps(3) 9s infinite, fadeOutCursor 1s 12s forwards;
+    }
+    @keyframes typingBioMS1 {
+        0%{
+            width: 0;
+        }
+        100%{
+            width: 240.03px; /*Panjang konten*/
+        }
+        
+    }
+
+    .typingContentBioMS2{
+        position: relative;
+        display: inline-block;
+        animation: typingBioMS2 2s steps(19) 12s forwards;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+    }
+    .typingContainerBioMS2::before{
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        right: -10px;
+        width: 10px;
+        height: 2px;
+        opacity: 0;
+        background-color: var(--accent);
+        animation: blinkCursor .5s steps(3) 12s infinite, fadeOutCursor 1s 14.5s forwards;
+    }
+    @keyframes typingBioMS2 {
+        0%{
+            width: 0;
+        }
+        100%{
+            width: 182.44px; /*Panjang konten*/
+        }
+        
+    }
+
+    .typingContentBioMS3{
+        position: relative;
+        display: inline-block;
+        animation: typingBioMS3 2.5s steps(25) 14.5s forwards;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+    }
+    .typingContainerBioMS3::before{
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        right: -10px;
+        width: 10px;
+        height: 2px;
+        opacity: 0;
+        background-color: var(--accent);
+        animation: blinkCursor .5s steps(3) 14.5s infinite, fadeOutCursor 1s 18.5s forwards;
+    }
+    @keyframes typingBioMS3 {
+        0%{
+            width: 0;
+        }
+        100%{
+            width: 240.04px; /*Panjang konten*/
+        }
+        
+    }
+
+    /* Typing Efect Moto Mobile Screen */
+    .typingContentMotoMS1{
+        position: relative;
+        display: inline-block;
+        animation: typingMotoMS1 2.5s steps(24) 18.5s forwards;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+    }
+    .typingContainerMotoMS1::before{
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        right: -10px;
+        width: 10px;
+        height: 2px;
+        opacity: 0;
+        background-color: var(--accent);
+        animation: blinkCursor .5s steps(3) 18.5s infinite, fadeOutCursor 1s 21.5s forwards;
+    }
+    @keyframes typingMotoMS1 {
+        0%{
+            width: 0;
+        }
+        100%{
+            width: 230.41px; 
+        }
+        
+    }
+
+    .typingContentMotoMS2{
+        position: relative;
+        display: inline-block;
+        animation: typingMotoMS2 2s steps(22) 21.5s forwards;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+    }
+    .typingContainerMotoMS2::before{
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        right: -10px;
+        width: 10px;
+        height: 2px;
+        opacity: 0;
+        background-color: var(--accent);
+        animation: blinkCursor .5s steps(3) 21.5s infinite, fadeOutCursor 1s 35s forwards;
+    }
+    @keyframes typingMotoMS2 {
+        0%{
+            width: 0;
+        }
+        100%{
+            width: 211.21px; /*Panjang konten*/
+        }
+        
+    }
+
+    /* Logo */
+    .logo {
+        align-items: flex-start !important;
+    }
+
+    #work .img-container {
+        width: 20% !important;
+        position: absolute;
+        top: 100px;
+        right: 0;
+    }
+    .img-container img {
+        max-width: 60% !important; /* Menghindari gambar melebihi lebar kontainer */
+    }
+}
+
+
+
+/* Section */
+section {
+    color: var(--text);
+    position: relative;
+    padding: 80px 40px 10px;
+    width: 100vw;
+    height: 100vh;
+    font-size: 1.3rem;
+}
+#work .text-container {
+    width: 100% !important;
+}
+#work {
+    display: flex;
+    justify-content: space-between;
+}
+#work .text-container {
+    width: 60%;
+}
+#work .img-container {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.img-container img {
+    width: 100%;
+}
+section h1 {
+    font-size: 80px;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+.animated-background {
+    font-size: 2rem;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--text);
+    background-clip: text;
+    background-position: 0 0;
+    animation: back 20s linear infinite;
+
+    /* Default background image for dark mode */
+    background-image: url(light-back.png); /* Ganti dengan path gambar untuk light mode */
+}
+
+.light-mode .animated-background {
+    background-image: url(dark-back.png); /* Ganti dengan path gambar untuk dark mode */
+}
+
+@keyframes back {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+
+/* Section Home */
+#home {
+    display: flex;
+    gap: 40px;
+}
+
+.intro {
+    width: 682px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.block {
+    display: block;
+}
+
+.intro .greeting,
+.intro .bio,
+.moto {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+}
+
+.intro .name {
+    font-size: 5rem;
+}
+
+.typingContainerGreeting,
+.typingContainerName,
+.typingContainerBio,
+.typingContainerMoto {
+    display: inline-block;
+    position: relative;
+}
+
+
+
+
+/* Typing Efect Greeting */
+.typingContentGreeting{
+    position: relative;
+    display: inline-block;
+    animation: typingGreeting 2s steps(10); /*Jumlah huruf konten*/
+    white-space: nowrap;
+    overflow: hidden;
+}
+.typingContainerGreeting::before{
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    right: -10px;
+    width: 10px;
+    height: 2px;
+    background-color: var(--accent);
+    animation: blinkCursor .5s steps(3) infinite, fadeOutCursor 1s 5s forwards;
+}
+@keyframes typingGreeting {
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 96.02px; /*Panjang konten*/
+    }
+    
+}
+
+
+/* Typing Efect Name */
+.typingContentName{
+    position: relative;
+    display: inline-block;
+    animation: typingName 1s steps(10) 6s forwards; /*Jumlah huruf konten*/
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+}
+.typingContainerName::before{
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    right: -10px;
+    width: 10px;
+    height: 2px;
+    opacity: 0;
+    background-color: var(--accent);
+    animation: blinkCursor .5s steps(3) 6s infinite, fadeOutCursor 1s 8s forwards;
+}
+@keyframes typingName {
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 480.08px; /*Panjang konten*/
+    }
+    
+}
+
+
+/* Typing Efect Bio */
+.typingContentBio{
+    position: relative;
+    display: inline-block;
+    animation: typingBio 8s steps(71) 9s forwards; /*Jumlah huruf konten*/
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+}
+.typingContainerBio::before{
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    right: -10px;
+    width: 10px;
+    height: 2px;
+    opacity: 0;
+    background-color: var(--accent);
+    animation: blinkCursor .5s steps(3) 9s infinite, fadeOutCursor 1s 18s forwards;
+}
+@keyframes typingBio {
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 681.72px; /*Panjang konten*/
+    }
+    
+}
+
+
+/* Typing Efect Moto */
+.typingContentMoto{
+    position: relative;
+    display: inline-block;
+    animation: typingMoto 5s steps(47) 18s forwards; /*Jumlah huruf konten */
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+}
+.typingContainerMoto::before{
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    right: -10px;
+    width: 10px;
+    height: 2px;
+    opacity: 0;
+    background-color: var(--accent);
+    animation: blinkCursor .5s steps(3) 18s infinite, fadeOutCursor 1s 30s forwards;
+}
+@keyframes typingMoto {
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 451.28px; /*Panjang konten*/
+    }
+    
+}
+
+
+/* Fade out blink cursor */
+@keyframes fadeOutCursor {
+    to {
+        opacity: 0;
+    }
+}
+
+
+/* SVG Logo */
+.logo {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+/* Arrow Animation */
+@keyframes arrowAnimationDown {
+    0%, 36%, 100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(28px);
+    }
+    11% {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+    12% {
+        opacity: 0;
+        transform: translateY(-28px);
+    }
+    13% {
+        opacity: 1;
+    }
+    23% {
+        opacity: 1;
+        transform: translateY(28px);
+    }
+    24% {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+    25% {
+        opacity: 0;
+        transform: translateY(-28px);
+    }
+    26% {
+        opacity: 1;
+    }
+}
+@keyframes arrowAnimationUp {
+    0%, 36%, 100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(-28px);
+    }
+    11% {
+        opacity: 0;
+        transform: translateY(-28px);
+    }
+    12% {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+    13% {
+        opacity: 1;
+    }
+    23% {
+        opacity: 1;
+        transform: translateY(-28px);
+    }
+    24% {
+        opacity: 0;
+        transform: translateY(-28px);
+    }
+    25% {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+    26% {
+        opacity: 1;
+    }
+}
+
+
+/* Ccroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 60px;
+    left: calc(50% - (35px/2));
+    overflow: hidden;
+    width: 35px;
+    height: 25px;
+}
+.arrow-container {
+    font-family: 'Fira Code', monospace;
+    text-align: center;
+    margin-top: -4px;
+    height: 27px;
+}
+.arrow-container.down {
+    animation: arrowAnimationDown 5s linear infinite;
+}
+.arrow-container.up {
+    animation: arrowAnimationUp 5s linear infinite;
+}
+.arrow {
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.arrow.down {
+    transform: rotate(90deg);
+}
+.arrow.up {
+    transform: rotate(-90deg);
+}
+
+/* Loading screen */
+.loader-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background);
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Roboto Mono', monospace;
+    transition: background-color 0.7s, color 0.7s;
+}
+.loader{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    left: calc(50% - (256.44px / 2));
+    padding: 0 10px;
+}
+.loader h1,
+.loader p {
+    font-weight: 200;
+    font-size: 1rem;
+    color: var(--text);
+}
+.loader h1 {
+    margin-right: 6px;
+    height: 26px;
+}
+
+/* Loader typing efect large screen*/
+.typingContainer1{
+    position: relative;
+    display: inline-block;
+}
+.typingContent1{
+    position: relative;
+    display: inline-block;
+    animation: typing 1s steps(8); /*Jumlah huruf konten*/
+    white-space: nowrap;
+    overflow: hidden;
+}
+.typingContainer1::before{
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    right: -10px;
+    width: 10px;
+    height: 2px;
+    background-color: var(--accent);
+    animation: blinkCursor .5s steps(3) infinite;
+}
+@keyframes blinkCursor {
+    0%,75%{
+        opacity: 1;
+    }
+    76%,100%{
+        opacity: 0;
+    } 
+}
+@keyframes typing {
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 76.81px; /*Panjang konten*/
+    }
+    
+}
+
+
+
+/* SVG */
+
+/***************************************************
+ * Generated by SVG Artista on 1/21/2024, 1:46:07 PM
+ * MIT license (https://opensource.org/licenses/MIT)
+ * W. https://svgartista.net
+ **************************************************/
+
+@-webkit-keyframes animate-svg-stroke-1 {
+0% {
+    stroke-dashoffset: 387.8345947265625px;
+    stroke-dasharray: 387.8345947265625px;
+}
+
+100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 387.8345947265625px;
+}
+}
+
+@keyframes animate-svg-stroke-1 {
+0% {
+    stroke-dashoffset: 387.8345947265625px;
+    stroke-dasharray: 387.8345947265625px;
+}
+
+100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 387.8345947265625px;
+}
+}
+
+@-webkit-keyframes animate-svg-fill-1 {
+0% {
+    fill: transparent;
+}
+
+100% {
+    /* fill: rgb(255, 255, 255); */
+    fill: var(--text);
+}
+}
+
+@keyframes animate-svg-fill-1 {
+0% {
+    fill: transparent;
+}
+
+100% {
+    /* fill: rgb(255, 255, 255); */
+    fill: var(--text);
+}
+}
+
+.svg-elem-1 {
+-webkit-animation: animate-svg-stroke-1 10s cubic-bezier(0.47, 0, 0.745, 0.715) 0s both,
+                        animate-svg-fill-1 7s cubic-bezier(0.47, 0, 0.745, 0.715) 8s both;
+        animation: animate-svg-stroke-1 10s cubic-bezier(0.47, 0, 0.745, 0.715) 0s both,
+                animate-svg-fill-1 7s cubic-bezier(0.47, 0, 0.745, 0.715) 8s both;
+}
+
+#svg1 path {
+    stroke: var(--text); /* Ganti dengan warna stroke yang diinginkan */
+}
+
+@-webkit-keyframes animate-svg-stroke-2 {
+0% {
+    stroke-dashoffset: 655.2581176757812px;
+    stroke-dasharray: 655.2581176757812px;
+}
+
+100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 655.2581176757812px;
+}
+}
+
+@keyframes animate-svg-stroke-2 {
+0% {
+    stroke-dashoffset: 655.2581176757812px;
+    stroke-dasharray: 655.2581176757812px;
+}
+
+100% {
+    stroke-dashoffset: 0;
+    stroke-dasharray: 655.2581176757812px;
+}
+}
+
+@-webkit-keyframes animate-svg-fill-2 {
+0% {
+    fill: transparent;
+}
+
+100% {
+    /* fill: rgb(255, 255, 255); */
+    fill: var(--text);
+}
+}
+
+@keyframes animate-svg-fill-2 {
+0% {
+    fill: transparent;
+}
+
+100% {
+    /* fill: rgb(255, 255, 255); */
+    fill: var(--text);
+}
+}
+
+.svg-elem-2 {
+-webkit-animation: animate-svg-stroke-2 10s cubic-bezier(0.47, 0, 0.745, 0.715) 0.12s both,
+                        animate-svg-fill-2 7s cubic-bezier(0.47, 0, 0.745, 0.715) 8s both;
+        animation: animate-svg-stroke-2 10s cubic-bezier(0.47, 0, 0.745, 0.715) 0.12s both,
+                animate-svg-fill-2 7s cubic-bezier(0.47, 0, 0.745, 0.715) 8s both;
+}
+
+.dark-mode .svg-elem-1 path {
+    stroke: var(--text);
+    fill: var(--text); /* Jangan lupa tambahkan fill jika diperlukan */
+}
+
+/* Dark mode styles */
+.svg-elem-1 path {
+    stroke: var(--background);
+    fill: var(--background); /* Jangan lupa tambahkan fill jika diperlukan */
+}
+
+.svg-elem-menu {
+    stroke: var(--accent-menu);
+    stroke-width: 1;
+}
+
+
+/* Contact Me */
+#contact a {
+    color: var(--accent);
+    text-decoration: none;
+}
