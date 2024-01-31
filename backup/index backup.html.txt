@@ -23,8 +23,8 @@
     <div id="content" class="hidden">
         <nav>
             <div class="branding">
-                <a href="#home" class="brand-name" data-fill-text="adeMuslim">
-                    adeMuslim<span class="dot">.</span>
+                <a href="#home">
+                    adeMuslim.
                 </a>
                 <div class="button">
                     <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -43,16 +43,16 @@
 
             <ul id="desktop-menu">
                 <li>
-                    <a href="#home"><span class="link-menu">home</span></a>
+                    <a href="#home"><span class="arrow-menu">></span><span class="link-menu">home</span></a>
                 </li>
                 <li>
-                    <a href="#work"><span class="link-menu">work</span></a>
+                    <a href="#work"><span class="arrow-menu">></span><span class="link-menu">work</span></a>
                 </li>
                 <li>
-                    <a href="#contact"><span class="link-menu">contact</span></a>
+                    <a href="#contact"><span class="arrow-menu">></span><span class="link-menu">contact</span></a>
                 </li>
                 <li>
-                    <a onclick="toggleLightMode()"><span class="link-menu theme-mode">day</span></a>
+                    <a onclick="toggleLightMode()"><span class="arrow-menu">></span><span class="link-menu theme-mode">day</span></a>
                 </li>
             </ul>
 
@@ -130,12 +130,10 @@
                         <p class="greeting typingContentGreeting">Hi, I &lt;AM&gt;</p>
                     </div>
                 </div>
-
                 <div class="block">
-                    <h1>
-                        <span>A</span><span>de</span>
-                        <span>M</span><span>uslim</span>
-                    </h1>
+                    <div class="typingContainerName">
+                        <p class="name typingContentName">ADE MUSLIM</p>
+                    </div>
                 </div>
 
                 <div class="block bio-desktop-screen">
@@ -214,10 +212,11 @@
             </div>
         </section>
         <section id="contact">
-            <h1>Contact</h1>
+            <h1>Contact<br>Me</h1>
             <a href="https://github.com/ademuslim" target="_blank">github.com/ademuslim</a>
-            <br>
             <a href="https://www.instagram.com/__ademuslim" target="_blank">instagram.com/__ademuslim</a>
+            <img src="pixel-logo.gif" alt="">
+
 
             <div class="scroll-indicator">
                 <div class="arrow-container up">

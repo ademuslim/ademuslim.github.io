@@ -25,7 +25,6 @@ html {
     --background: #151515;
     --accent: #ffc800;
     --accent-menu: #0056e0;
-    --grey: rgb(64, 64, 64);
     transition: background-color 0.7s, color 0.7s;
 }
 .light-mode {
@@ -33,7 +32,6 @@ html {
     --background: #F5F5F5;
     --accent: #0056e0;
     --accent-menu: #ffc800;
-    --grey: rgb(152, 152, 152);
 }
 
 
@@ -82,10 +80,10 @@ nav {
     font-family: 'Roboto Mono', monospace;
     color: var(--text);
     background-color: var(--background);
+    transition: background-color 0.5s ease; /* Transisi warna latar belakang */
     backdrop-filter: blur(6px);
     z-index: 1000;
 }
-
 @keyframes slideDown {
     from {
         opacity: 0;
@@ -104,83 +102,44 @@ nav {
     z-index: 1000;
     animation: slideDown 0.5s ease-in-out;
 }
-
 nav .branding a {
     text-decoration: none;
-    position: relative;
     color: var(--text);
     font-weight: 500;
 }
-nav .branding a .dot {
-    color: var(--accent);
-}
-
-.brand-name::before {
-    content: attr(data-fill-text);
-    position: absolute;
-    width: 0;
-    height: 100%;
-    color: var(--accent);
-    overflow: hidden;
-    transition: width 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-.brand-name:hover::before {
-    width: 100%;
-}
-
-
-
-
 #desktop-menu {
     display: flex;
-    justify-content: space-between;
-    position: relative;
     list-style-type: none;
-    gap: 30px;
-    padding: 0 20px;
+    width: 400px;
+    /* counter-reset: menuCounter; Inisialisasi counter */
+    letter-spacing: -1px;
 }
-#desktop-menu::before {
-    content: "[";
-    left: 0;
+#desktop-menu li {
+    /* counter-increment: menuCounter; Increment counter pada setiap item li */
+    margin-left: 35px;
+    position: relative;
 }
-
-
-#desktop-menu::after {
-    content: "]";
-    right: 0;
-}
-#desktop-menu::before,
-#desktop-menu::after {
-    position: absolute;
+#desktop-menu .arrow-menu {
+    font-size: 1.5rem;
+    font-family: 'Fira Code', monospace;
+    vertical-align: middle;
+    margin-right: 2px;
+    cursor: pointer;
+    position: relative; /* Membuat arrow-menu sebagai konteks posisi untuk penempatan absolut */
+    top: 1px; /* Menyesuaikan nilai top untuk memindahkannya ke bawah */
     color: var(--accent);
-    font-weight: 500;
-    font-family: 'Fira Code', monospace;
 }
-
-.link-menu::before {
-    content: "'";
+.link-menu {
+    vertical-align: middle;
 }
-
-.link-menu::after {
-    content: "',";
-}
-
-.theme-mode::before {
-    content: "'";
-}
-
-.theme-mode::after {
-    content: "'";
-}
-
-.link-menu::before,
-.link-menu::after,
-.theme-mode::before,
-.theme-mode::after {
-    color: var(--grey);
-    font-family: 'Fira Code', monospace;
-}
-
+/* #desktop-menu li a span.link-menu::before {
+    content: "0" counter(menuCounter); Menambahkan counter ke teks
+    position: absolute;
+    top: -16px; Mengatur posisi di atas link
+    right: 0;
+    color: grey;
+    font-size: 12px;
+} */
 .theme-mode {
     cursor: pointer;
 }
@@ -189,15 +148,48 @@ nav .branding a .dot {
     position: relative;
     color: var(--text);
     font-weight: 500;
+    display: inline-block;
     transition: color 0.3s ease;
 }
 #desktop-menu li a:hover {
     color: var(--text); /* Warna saat di-hover */
 }
 #desktop-menu:hover li a:not(:hover) {
-    color: var(--grey); /* Warna saat tidak di-hover ketika ada yang di-hover */
+    color: grey; /* Warna saat tidak di-hover ketika ada yang di-hover */
 }
-
+#desktop-menu li a:hover .arrow-menu {
+    color: var(--accent);
+}
+#desktop-menu:hover li a:not(:hover) .arrow-menu {
+    color: grey; /* Warna saat tidak di-hover ketika ada yang di-hover */
+}
+/* Animasi hover */
+@keyframes blink {
+    0%, 100% {
+    opacity: 1;
+    }
+    50% {
+    opacity: 0;
+    }
+}
+/* Gaya saat dihover */
+#desktop-menu li:hover span.link-menu::after {
+    content: '';
+    position: absolute;
+    bottom: 7px;
+    right: -12px;
+    width: 10px;
+    height: 2px;
+    background-color: var(--accent);
+    animation: blink 1s infinite;
+}
+#desktop-menu li span.link-menu::after {
+    content: ""; /* Konten "_" akan ditambahkan saat dihover */
+    position: absolute;
+    bottom: 5px;
+    font-weight: 500;
+    right: -10px;
+}
 
 
 /* Menyembunyikan elemen di layar besar*/
@@ -404,9 +396,25 @@ nav .branding a .dot {
         width: 287.33px !important;
     }
 
-    .intro h1 span {
-        display: inline-flex;
-        font-size: 2.5rem;
+    .intro .name {
+        font-size: 2rem !important;
+    }
+
+    /* Typing Efect Name */
+    .typingContentName{
+        animation: typingNameMobileScreen 1s steps(10) 6s forwards !important; /*Jumlah huruf konten*/
+    }
+    .typingContainerName::before{
+        bottom: 6px !important;
+        }
+    @keyframes typingNameMobileScreen {
+        0%{
+            width: 0;
+        }
+        100%{
+            width: 192.03px; /*Panjang konten*/
+        }
+        
     }
 
     .bio-mobile-screen,
@@ -570,13 +578,6 @@ nav .branding a .dot {
         
     }
 
-    .link-menu::before,
-    .link-menu::after,
-    .theme-mode::before,
-    .theme-mode::after {
-        display: none;
-    }
-
     /* Logo */
     .logo {
         align-items: flex-start !important;
@@ -683,54 +684,13 @@ section h1 {
     font-family: 'Roboto Mono', monospace;
     font-size: 1rem;
 }
-.intro h1 {
-    text-transform: uppercase;
+
+.intro .name {
+    font-size: 5rem;
 }
-.intro h1 span {
-    display: inline-flex;
-}
-
-h1 span:nth-child(odd),
-h1 span:nth-child(even) {
-    overflow: hidden;
-    transition: ease-in-out 0.5s;
-    letter-spacing: -1em;
-}
-h1:hover span:nth-child(odd),
-h1:hover span:nth-child(even) {
-    letter-spacing: 0;
-}
-
-h1 span:nth-child(1) {
-    animation: reveal .1s ease-in-out 5s forwards; /* Animasi berjalan otomatis selama 4 detik */
-}
-
-@keyframes reveal {
-    0% {
-        letter-spacing: -1em;
-    }
-    100% {
-        letter-spacing: 0;
-    }
-}
-
-h1 span:nth-child(3) {
-    animation: reveal .1s ease-in-out 5.2s forwards; /* Animasi berjalan otomatis selama 4 detik dengan delay 2 detik */
-}
-
-h1 span:nth-child(2) {
-    animation: reveal .5s ease-in-out 7s forwards; /* Animasi berjalan otomatis selama 4 detik dengan delay 0.5 detik */
-}
-
-
-
-h1 span:nth-child(4) {
-    animation: reveal 1s ease-in-out 7.5s forwards; /* Animasi berjalan otomatis selama 4 detik dengan delay 2.5 detik */
-}
-
-
 
 .typingContainerGreeting,
+.typingContainerName,
 .typingContainerBio,
 .typingContainerMoto {
     display: inline-block;
@@ -768,6 +728,36 @@ h1 span:nth-child(4) {
     
 }
 
+
+/* Typing Efect Name */
+.typingContentName{
+    position: relative;
+    display: inline-block;
+    animation: typingName 1s steps(10) 6s forwards; /*Jumlah huruf konten*/
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+}
+.typingContainerName::before{
+    content: '';
+    position: absolute;
+    bottom: 20px;
+    right: -10px;
+    width: 10px;
+    height: 2px;
+    opacity: 0;
+    background-color: var(--accent);
+    animation: blinkCursor .5s steps(3) 6s infinite, fadeOutCursor 1s 8s forwards;
+}
+@keyframes typingName {
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 480.08px; /*Panjang konten*/
+    }
+    
+}
 
 
 /* Typing Efect Bio */
