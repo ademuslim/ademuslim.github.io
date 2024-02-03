@@ -18,6 +18,12 @@ document.addEventListener('DOMContentLoaded', function () {
             nav.classList.remove('sticky');
         }
     });
+
+    // Fungsi untuk mengubah tampilan SVG setelah 5 detik
+    setTimeout(function() {
+        document.getElementById('svg1').style.display = 'none';
+        document.getElementById('svg2').style.display = 'block';
+    }, 20000);
 });
 
 function toggleMenu() {

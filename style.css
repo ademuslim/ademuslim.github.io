@@ -3,20 +3,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
+
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     scrollbar-width: thin;
 }
+
 body, html {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
 }
+
 html {
     scroll-behavior: smooth;
 }
+
 
 
 /* Darkmode default */
@@ -28,6 +33,7 @@ html {
     --grey: rgb(64, 64, 64);
     transition: background-color 0.7s, color 0.7s;
 }
+
 .light-mode {
     --text: #151515;
     --background: #F5F5F5;
@@ -35,6 +41,7 @@ html {
     --accent-menu: #ffc800;
     --grey: rgb(152, 152, 152);
 }
+
 
 
 body {
@@ -45,30 +52,114 @@ body {
     font-family: 'Roboto Mono', monospace;
     transition: background-color 0.7s, color 0.7s;
 }
+
 .hidden {
     display: none;
 }
+
 ::selection {
     color: var(--background); /* Warna teks saat di-highlight/blok */
     background-color: var(--text); /* Warna latar belakang saat di-highlight/blok */
 }
+
 ::-moz-selection {
 color: var(--background);
 background-color: var(--text);
 }
-/* Warna scrollbar */
+
 ::-webkit-scrollbar {
     width: 4px; /* Ukuran scrollbar */
 }
+
 /* Warna thumb scrollbar */
 ::-webkit-scrollbar-thumb {
     background-color: var(--text); /* Warna atas */
     border-bottom: 80px solid var(--background); /* Garis pemisah warna atas dan tengah */
     border-top: 80px solid var(--background); /* Garis pemisah warna tengah dan bawah */
 }
+
 ::-webkit-scrollbar-track {
     background-color: var(--background); /* Warna track scrollbar */
 }
+
+
+
+/* Loading screen */
+.loader-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background);
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Roboto Mono', monospace;
+    transition: background-color 0.7s, color 0.7s;
+}
+
+.loader{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    left: calc(50% - (256.44px / 2));
+    padding: 0 10px;
+}
+
+.loader h1,
+.loader p {
+    font-weight: 200;
+    font-size: 1rem;
+    color: var(--text);
+}
+
+.loader h1 {
+    margin-right: 6px;
+    height: 26px;
+}
+
+/* Loader typing efect large screen*/
+.typingContainer1{
+    position: relative;
+    display: inline-block;
+}
+
+.typingContent1{
+    position: relative;
+    display: inline-block;
+    animation: typing 1s steps(8); /*Jumlah huruf konten*/
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.typingContainer1::before{
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    right: -10px;
+    width: 10px;
+    height: 2px;
+    background-color: var(--accent);
+    animation: blinkCursor .5s steps(3) infinite;
+}
+
+@keyframes blinkCursor {
+    0%,75%{
+        opacity: 1;
+    }
+    76%,100%{
+        opacity: 0;
+    } 
+}
+
+@keyframes typing {
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 76.81px; /*Panjang konten*/
+    }
+    
+}
+
 
 
 /* Navbar */
@@ -86,31 +177,13 @@ nav {
     z-index: 1000;
 }
 
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-100%);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-.sticky {
-    position: fixed;
-    top: 0;
-    background-color: rgba(21, 21, 21, 0.2);
-    width: 100%;
-    z-index: 1000;
-    animation: slideDown 0.5s ease-in-out;
-}
-
 nav .branding a {
     text-decoration: none;
     position: relative;
     color: var(--text);
     font-weight: 500;
 }
+
 nav .branding a .dot {
     color: var(--accent);
 }
@@ -124,10 +197,30 @@ nav .branding a .dot {
     overflow: hidden;
     transition: width 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
+
 .brand-name:hover::before {
     width: 100%;
 }
 
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    background-color: rgba(21, 21, 21, 0.2);
+    width: 100%;
+    z-index: 1000;
+    animation: slideDown 0.5s ease-in-out;
+}
 
 
 
@@ -139,16 +232,17 @@ nav .branding a .dot {
     gap: 30px;
     padding: 0 20px;
 }
+
 #desktop-menu::before {
     content: "[";
     left: 0;
 }
 
-
 #desktop-menu::after {
     content: "]";
     right: 0;
 }
+
 #desktop-menu::before,
 #desktop-menu::after {
     position: absolute;
@@ -184,6 +278,7 @@ nav .branding a .dot {
 .theme-mode {
     cursor: pointer;
 }
+
 #desktop-menu li a {
     text-decoration: none;
     position: relative;
@@ -191,11 +286,549 @@ nav .branding a .dot {
     font-weight: 500;
     transition: color 0.3s ease;
 }
+
 #desktop-menu li a:hover {
     color: var(--text); /* Warna saat di-hover */
 }
+
 #desktop-menu:hover li a:not(:hover) {
     color: var(--grey); /* Warna saat tidak di-hover ketika ada yang di-hover */
+}
+
+
+
+/* Section */
+section {
+    color: var(--text);
+    position: relative;
+    padding: 80px 40px 10px;
+    width: 100vw;
+    height: 100vh;
+    font-size: 1.3rem;
+}
+
+section h1 {
+    font-size: 80px;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+}
+
+
+
+/* Section Home */
+#home {
+    display: flex;
+    gap: 40px;
+}
+
+.intro {
+    width: 682px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.block {
+    display: block;
+}
+
+.intro .greeting,
+.intro .bio,
+.moto {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+}
+
+.intro h1 {
+    text-transform: uppercase;
+}
+
+.intro h1 span {
+    display: inline-flex;
+}
+
+h1 span:nth-child(odd),
+h1 span:nth-child(even) {
+    overflow: hidden;
+    transition: ease-in-out 0.5s;
+    letter-spacing: -1em;
+}
+
+h1:hover span:nth-child(odd),
+h1:hover span:nth-child(even) {
+    letter-spacing: 0;
+}
+
+h1 span:nth-child(1) {
+    animation: reveal .1s ease-in-out 5s forwards; 
+}
+
+@keyframes reveal {
+    0% {
+        letter-spacing: -1em;
+    }
+    100% {
+        letter-spacing: 0;
+    }
+}
+
+h1 span:nth-child(3) {
+    animation: reveal .1s ease-in-out 5.1s forwards; /* Animasi berjalan otomatis selama 4 detik dengan delay 2 detik */
+}
+
+h1 span:nth-child(2) {
+    animation: reveal .2s ease-in-out 6s forwards; /* Animasi berjalan otomatis selama 4 detik dengan delay 0.5 detik */
+}
+
+h1 span:nth-child(4) {
+    animation: reveal .5s ease-in-out 6.2s forwards; /* Animasi berjalan otomatis selama 4 detik dengan delay 2.5 detik */
+}
+
+
+
+.typingContainerGreeting,
+.typingContainerBio,
+.typingContainerMoto {
+    display: inline-block;
+    position: relative;
+}
+
+/* Typing Efect Greeting */
+.typingContentGreeting{
+    position: relative;
+    display: inline-block;
+    animation: typingGreeting 2s steps(10); /*Jumlah huruf konten*/
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.typingContainerGreeting::before{
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    right: -10px;
+    width: 10px;
+    height: 2px;
+    background-color: var(--accent);
+    animation: blinkCursor .5s steps(3) infinite, fadeOutCursor 1s 5s forwards;
+}
+
+@keyframes typingGreeting {
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 96.02px; /*Panjang konten*/
+    }
+    
+}
+
+/* Typing Efect Bio */
+.typingContentBio{
+    position: relative;
+    display: inline-block;
+    animation: typingBio 8s steps(71) 9s forwards; /*Jumlah huruf konten*/
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+}
+
+.typingContainerBio::before{
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    right: -10px;
+    width: 10px;
+    height: 2px;
+    opacity: 0;
+    background-color: var(--accent);
+    animation: blinkCursor .5s steps(3) 9s infinite, fadeOutCursor 1s 18s forwards;
+}
+
+@keyframes typingBio {
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 681.72px; /*Panjang konten*/
+    }
+    
+}
+
+/* Typing Efect Moto */
+.typingContentMoto{
+    position: relative;
+    display: inline-block;
+    animation: typingMoto 5s steps(47) 18s forwards; /*Jumlah huruf konten */
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+}
+
+.typingContainerMoto::before{
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    right: -10px;
+    width: 10px;
+    height: 2px;
+    opacity: 0;
+    background-color: var(--accent);
+    animation: blinkCursor .5s steps(3) 18s infinite, fadeOutCursor 1s 30s forwards;
+}
+
+@keyframes typingMoto {
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 451.28px; /*Panjang konten*/
+    }
+    
+}
+
+/* Fade out blink cursor */
+@keyframes fadeOutCursor {
+    to {
+        opacity: 0;
+    }
+}
+
+.logo {
+    position: relative;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo .svg2{
+    position: absolute;
+    width: 80%;
+    height: 80%;
+}
+
+
+
+/* Arrow Animation */
+@keyframes arrowAnimationDown {
+    0%, 36%, 100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(28px);
+    }
+    11% {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+    12% {
+        opacity: 0;
+        transform: translateY(-28px);
+    }
+    13% {
+        opacity: 1;
+    }
+    23% {
+        opacity: 1;
+        transform: translateY(28px);
+    }
+    24% {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+    25% {
+        opacity: 0;
+        transform: translateY(-28px);
+    }
+    26% {
+        opacity: 1;
+    }
+}
+
+@keyframes arrowAnimationUp {
+    0%, 36%, 100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(-28px);
+    }
+    11% {
+        opacity: 0;
+        transform: translateY(-28px);
+    }
+    12% {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+    13% {
+        opacity: 1;
+    }
+    23% {
+        opacity: 1;
+        transform: translateY(-28px);
+    }
+    24% {
+        opacity: 0;
+        transform: translateY(-28px);
+    }
+    25% {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+    26% {
+        opacity: 1;
+    }
+}
+
+
+
+/* Ccroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 60px;
+    left: calc(50% - (35px/2));
+    overflow: hidden;
+    width: 35px;
+    height: 25px;
+}
+
+.arrow-container {
+    font-family: 'Fira Code', monospace;
+    text-align: center;
+    margin-top: -4px;
+    height: 27px;
+}
+
+.arrow-container.down {
+    animation: arrowAnimationDown 5s linear infinite;
+}
+
+.arrow-container.up {
+    animation: arrowAnimationUp 5s linear infinite;
+}
+
+.arrow {
+    color: var(--accent);
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.arrow.down {
+    transform: rotate(90deg);
+}
+
+.arrow.up {
+    transform: rotate(-90deg);
+}
+
+
+
+
+/* SVG Logo Animation */
+@-webkit-keyframes animate-svg-stroke-1 {
+    0% {
+        stroke-dashoffset: 387.8345947265625px;
+        stroke-dasharray: 387.8345947265625px;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        stroke-dasharray: 387.8345947265625px;
+    }
+}
+
+@keyframes animate-svg-stroke-1 {
+    0% {
+        stroke-dashoffset: 387.8345947265625px;
+        stroke-dasharray: 387.8345947265625px;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        stroke-dasharray: 387.8345947265625px;
+    }
+}
+
+@-webkit-keyframes animate-svg-fill-1 {
+    0% {
+        fill: transparent;
+    }
+
+    100% {
+        /* fill: rgb(255, 255, 255); */
+        fill: var(--text);
+    }
+}
+
+@keyframes animate-svg-fill-1 {
+    0% {
+        fill: transparent;
+    }
+
+    100% {
+        /* fill: rgb(255, 255, 255); */
+        fill: var(--text);
+    }
+}
+
+.svg-elem-1 {
+-webkit-animation:  animate-svg-stroke-1 10s cubic-bezier(0.47, 0, 0.745, 0.715) 0s both,
+                    animate-svg-fill-1 7s cubic-bezier(0.47, 0, 0.745, 0.715) 8s both;
+                    animation: animate-svg-stroke-1 10s cubic-bezier(0.47, 0, 0.745, 0.715) 0s both,
+                    animate-svg-fill-1 7s cubic-bezier(0.47, 0, 0.745, 0.715) 8s both;
+}
+
+#svg1 path {
+    stroke: var(--text); 
+}
+
+#svg2 {
+    display: none;
+}
+
+#svg2 path {
+    fill: var(--text); 
+}
+
+@-webkit-keyframes animate-svg-stroke-2 {
+    0% {
+        stroke-dashoffset: 655.2581176757812px;
+        stroke-dasharray: 655.2581176757812px;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        stroke-dasharray: 655.2581176757812px;
+    }
+}
+
+@keyframes animate-svg-stroke-2 {
+    0% {
+        stroke-dashoffset: 655.2581176757812px;
+        stroke-dasharray: 655.2581176757812px;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        stroke-dasharray: 655.2581176757812px;
+    }
+}
+
+@-webkit-keyframes animate-svg-fill-2 {
+    0% {
+        fill: transparent;
+    }
+
+    100% {
+        /* fill: rgb(255, 255, 255); */
+        fill: var(--text);
+    }
+}
+
+@keyframes animate-svg-fill-2 {
+    0% {
+        fill: transparent;
+    }
+
+    100% {
+        /* fill: rgb(255, 255, 255); */
+        fill: var(--text);
+    }
+}
+
+.svg-elem-2 {
+-webkit-animation:  animate-svg-stroke-2 10s cubic-bezier(0.47, 0, 0.745, 0.715) 0.12s both,
+                    animate-svg-fill-2 7s cubic-bezier(0.47, 0, 0.745, 0.715) 8s both;
+                    animation: animate-svg-stroke-2 10s cubic-bezier(0.47, 0, 0.745, 0.715) 0.12s both,
+                    animate-svg-fill-2 7s cubic-bezier(0.47, 0, 0.745, 0.715) 8s both;
+}
+
+.dark-mode .svg-elem-1 path {
+    stroke: var(--text);
+    fill: var(--text); /* Jangan lupa tambahkan fill jika diperlukan */
+}
+
+/* Dark mode styles */
+.svg-elem-1 path {
+    stroke: var(--background);
+    fill: var(--background); /* Jangan lupa tambahkan fill jika diperlukan */
+}
+
+.svg-elem-menu {
+    stroke: var(--accent-menu);
+    stroke-width: 1;
+}
+
+
+
+/* Work section */
+#work .text-container {
+    width: 100% !important;
+}
+
+#work {
+    display: flex;
+    justify-content: space-between;
+}
+
+#work .text-container {
+    width: 60%;
+}
+
+#work .img-container {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-container img {
+    width: 100%;
+}
+
+.animated-background {
+    font-size: 2rem;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--text);
+    background-clip: text;
+    background-position: 0 0;
+    animation: back 20s linear infinite;
+
+    /* Default background image for dark mode */
+    background-image: url(light-back.png); /* Ganti dengan path gambar untuk light mode */
+}
+
+.light-mode .animated-background {
+    background-image: url(dark-back.png); /* Ganti dengan path gambar untuk dark mode */
+}
+
+@keyframes back {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+
+
+/* Contact Me */
+#contact a {
+    color: var(--accent);
+    text-decoration: none;
 }
 
 
@@ -213,6 +846,7 @@ nav .branding a .dot {
 }
 
 
+
 /* Media query untuk layar kecil */
 @media (max-width: 767px) {
     
@@ -220,6 +854,7 @@ nav .branding a .dot {
     #desktop-menu {
         display: none;
     }
+
     .bio-desktop-screen,
     .moto-desktop-screen {
         display: none !important;
@@ -234,25 +869,30 @@ nav .branding a .dot {
         overflow: hidden;
         transition: max-height 1s ease; /* Menambahkan transition pada max-height */
     }
+
     nav .branding {
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
     }
+
     nav.-mobile-menu-open {
         background-color: var(--text);
         color: var(--background);
         max-height: 800px; /* Sesuaikan dengan nilai maksimum yang diinginkan saat menu tampil */
         transition: max-height 1s ease; /* Tambahkan transition pada max-height */
     }
+
     nav.-mobile-menu-open .branding a {
         color: var(--background);
     }
+
     .mobile-menu {
         display: none;
         list-style-type: none;
     }
+
     .mobile-menu.-open {
         display: flex;
         position: relative;
@@ -342,11 +982,13 @@ nav .branding a .dot {
         align-items: center;
         height: 30px;
     }
+
     .mobile-menu li {
         display: flex;
         align-items: center;
         height: 37px;
     }
+
     .mobile-menu .link-menu {
         height: 100%;
         display: flex;
@@ -360,9 +1002,11 @@ nav .branding a .dot {
         font-weight: 500;
         transition: color 0.3s ease;
     }
+
     .menu-title p   {
         margin-left: 6px;
     }
+
     .mobile-menu li .link-menu svg {
         margin-left: 52px;
     }
@@ -370,13 +1014,16 @@ nav .branding a .dot {
     .mobile-menu .menu-title p {
         margin-left: 46px;
     }
+
     .mobile-menu li:last-child .link-menu .theme-mode {
         margin-left: 92px;
     }
+
     span.link-menu svg {
         width: 34px;
         height: 34px;
     }
+
     .mobile-menu li:last-child {
         position: relative;
     }
@@ -388,6 +1035,7 @@ nav .branding a .dot {
         width: 34px;
         height: 17px;
     }
+    
     span.menu-title svg {
         left: 6px;
     }
@@ -396,6 +1044,7 @@ nav .branding a .dot {
         flex-direction: column;
         gap: 2px !important;
     }
+
     section {
         padding: 70px 10px 10px !important;
     }
@@ -432,6 +1081,7 @@ nav .branding a .dot {
         overflow: hidden;
         width: 0;
     }
+
     .typingContainerBioMS1::before{
         content: '';
         position: absolute;
@@ -443,6 +1093,7 @@ nav .branding a .dot {
         background-color: var(--accent);
         animation: blinkCursor .5s steps(3) 9s infinite, fadeOutCursor 1s 12s forwards;
     }
+
     @keyframes typingBioMS1 {
         0%{
             width: 0;
@@ -461,6 +1112,7 @@ nav .branding a .dot {
         overflow: hidden;
         width: 0;
     }
+
     .typingContainerBioMS2::before{
         content: '';
         position: absolute;
@@ -472,6 +1124,7 @@ nav .branding a .dot {
         background-color: var(--accent);
         animation: blinkCursor .5s steps(3) 12s infinite, fadeOutCursor 1s 14.5s forwards;
     }
+
     @keyframes typingBioMS2 {
         0%{
             width: 0;
@@ -490,6 +1143,7 @@ nav .branding a .dot {
         overflow: hidden;
         width: 0;
     }
+
     .typingContainerBioMS3::before{
         content: '';
         position: absolute;
@@ -501,6 +1155,7 @@ nav .branding a .dot {
         background-color: var(--accent);
         animation: blinkCursor .5s steps(3) 14.5s infinite, fadeOutCursor 1s 18.5s forwards;
     }
+
     @keyframes typingBioMS3 {
         0%{
             width: 0;
@@ -520,6 +1175,7 @@ nav .branding a .dot {
         overflow: hidden;
         width: 0;
     }
+
     .typingContainerMotoMS1::before{
         content: '';
         position: absolute;
@@ -531,6 +1187,7 @@ nav .branding a .dot {
         background-color: var(--accent);
         animation: blinkCursor .5s steps(3) 18.5s infinite, fadeOutCursor 1s 21.5s forwards;
     }
+
     @keyframes typingMotoMS1 {
         0%{
             width: 0;
@@ -549,6 +1206,7 @@ nav .branding a .dot {
         overflow: hidden;
         width: 0;
     }
+
     .typingContainerMotoMS2::before{
         content: '';
         position: absolute;
@@ -560,6 +1218,7 @@ nav .branding a .dot {
         background-color: var(--accent);
         animation: blinkCursor .5s steps(3) 21.5s infinite, fadeOutCursor 1s 35s forwards;
     }
+
     @keyframes typingMotoMS2 {
         0%{
             width: 0;
@@ -577,6 +1236,7 @@ nav .branding a .dot {
         display: none;
     }
 
+
     /* Logo */
     .logo {
         align-items: flex-start !important;
@@ -588,586 +1248,8 @@ nav .branding a .dot {
         top: 100px;
         right: 0;
     }
+
     .img-container img {
         max-width: 60% !important; /* Menghindari gambar melebihi lebar kontainer */
     }
-}
-
-
-
-/* Section */
-section {
-    color: var(--text);
-    position: relative;
-    padding: 80px 40px 10px;
-    width: 100vw;
-    height: 100vh;
-    font-size: 1.3rem;
-}
-#work .text-container {
-    width: 100% !important;
-}
-#work {
-    display: flex;
-    justify-content: space-between;
-}
-#work .text-container {
-    width: 60%;
-}
-#work .img-container {
-    width: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.img-container img {
-    width: 100%;
-}
-section h1 {
-    font-size: 80px;
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.1;
-    margin-bottom: 1rem;
-}
-
-.animated-background {
-    font-size: 2rem;
-    font-family: 'Poppins', sans-serif;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-    color: transparent;
-    -webkit-text-stroke: 1px var(--text);
-    background-clip: text;
-    background-position: 0 0;
-    animation: back 20s linear infinite;
-
-    /* Default background image for dark mode */
-    background-image: url(light-back.png); /* Ganti dengan path gambar untuk light mode */
-}
-
-.light-mode .animated-background {
-    background-image: url(dark-back.png); /* Ganti dengan path gambar untuk dark mode */
-}
-
-@keyframes back {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 100% 0;
-    }
-}
-
-
-/* Section Home */
-#home {
-    display: flex;
-    gap: 40px;
-}
-
-.intro {
-    width: 682px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.block {
-    display: block;
-}
-
-.intro .greeting,
-.intro .bio,
-.moto {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 1rem;
-}
-.intro h1 {
-    text-transform: uppercase;
-}
-.intro h1 span {
-    display: inline-flex;
-}
-
-h1 span:nth-child(odd),
-h1 span:nth-child(even) {
-    overflow: hidden;
-    transition: ease-in-out 0.5s;
-    letter-spacing: -1em;
-}
-h1:hover span:nth-child(odd),
-h1:hover span:nth-child(even) {
-    letter-spacing: 0;
-}
-
-h1 span:nth-child(1) {
-    animation: reveal .1s ease-in-out 5s forwards; /* Animasi berjalan otomatis selama 4 detik */
-}
-
-@keyframes reveal {
-    0% {
-        letter-spacing: -1em;
-    }
-    100% {
-        letter-spacing: 0;
-    }
-}
-
-h1 span:nth-child(3) {
-    animation: reveal .1s ease-in-out 5.2s forwards; /* Animasi berjalan otomatis selama 4 detik dengan delay 2 detik */
-}
-
-h1 span:nth-child(2) {
-    animation: reveal .5s ease-in-out 7s forwards; /* Animasi berjalan otomatis selama 4 detik dengan delay 0.5 detik */
-}
-
-
-
-h1 span:nth-child(4) {
-    animation: reveal 1s ease-in-out 7.5s forwards; /* Animasi berjalan otomatis selama 4 detik dengan delay 2.5 detik */
-}
-
-
-
-.typingContainerGreeting,
-.typingContainerBio,
-.typingContainerMoto {
-    display: inline-block;
-    position: relative;
-}
-
-
-
-
-/* Typing Efect Greeting */
-.typingContentGreeting{
-    position: relative;
-    display: inline-block;
-    animation: typingGreeting 2s steps(10); /*Jumlah huruf konten*/
-    white-space: nowrap;
-    overflow: hidden;
-}
-.typingContainerGreeting::before{
-    content: '';
-    position: absolute;
-    bottom: 4px;
-    right: -10px;
-    width: 10px;
-    height: 2px;
-    background-color: var(--accent);
-    animation: blinkCursor .5s steps(3) infinite, fadeOutCursor 1s 5s forwards;
-}
-@keyframes typingGreeting {
-    0%{
-        width: 0;
-    }
-    100%{
-        width: 96.02px; /*Panjang konten*/
-    }
-    
-}
-
-
-
-/* Typing Efect Bio */
-.typingContentBio{
-    position: relative;
-    display: inline-block;
-    animation: typingBio 8s steps(71) 9s forwards; /*Jumlah huruf konten*/
-    white-space: nowrap;
-    overflow: hidden;
-    width: 0;
-}
-.typingContainerBio::before{
-    content: '';
-    position: absolute;
-    bottom: 4px;
-    right: -10px;
-    width: 10px;
-    height: 2px;
-    opacity: 0;
-    background-color: var(--accent);
-    animation: blinkCursor .5s steps(3) 9s infinite, fadeOutCursor 1s 18s forwards;
-}
-@keyframes typingBio {
-    0%{
-        width: 0;
-    }
-    100%{
-        width: 681.72px; /*Panjang konten*/
-    }
-    
-}
-
-
-/* Typing Efect Moto */
-.typingContentMoto{
-    position: relative;
-    display: inline-block;
-    animation: typingMoto 5s steps(47) 18s forwards; /*Jumlah huruf konten */
-    white-space: nowrap;
-    overflow: hidden;
-    width: 0;
-}
-.typingContainerMoto::before{
-    content: '';
-    position: absolute;
-    bottom: 4px;
-    right: -10px;
-    width: 10px;
-    height: 2px;
-    opacity: 0;
-    background-color: var(--accent);
-    animation: blinkCursor .5s steps(3) 18s infinite, fadeOutCursor 1s 30s forwards;
-}
-@keyframes typingMoto {
-    0%{
-        width: 0;
-    }
-    100%{
-        width: 451.28px; /*Panjang konten*/
-    }
-    
-}
-
-
-/* Fade out blink cursor */
-@keyframes fadeOutCursor {
-    to {
-        opacity: 0;
-    }
-}
-
-
-/* SVG Logo */
-.logo {
-    display: flex;
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-}
-
-
-
-/* Arrow Animation */
-@keyframes arrowAnimationDown {
-    0%, 36%, 100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    10% {
-        opacity: 1;
-        transform: translateY(28px);
-    }
-    11% {
-        opacity: 0;
-        transform: translateY(28px);
-    }
-    12% {
-        opacity: 0;
-        transform: translateY(-28px);
-    }
-    13% {
-        opacity: 1;
-    }
-    23% {
-        opacity: 1;
-        transform: translateY(28px);
-    }
-    24% {
-        opacity: 0;
-        transform: translateY(28px);
-    }
-    25% {
-        opacity: 0;
-        transform: translateY(-28px);
-    }
-    26% {
-        opacity: 1;
-    }
-}
-@keyframes arrowAnimationUp {
-    0%, 36%, 100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    10% {
-        opacity: 1;
-        transform: translateY(-28px);
-    }
-    11% {
-        opacity: 0;
-        transform: translateY(-28px);
-    }
-    12% {
-        opacity: 0;
-        transform: translateY(28px);
-    }
-    13% {
-        opacity: 1;
-    }
-    23% {
-        opacity: 1;
-        transform: translateY(-28px);
-    }
-    24% {
-        opacity: 0;
-        transform: translateY(-28px);
-    }
-    25% {
-        opacity: 0;
-        transform: translateY(28px);
-    }
-    26% {
-        opacity: 1;
-    }
-}
-
-
-/* Ccroll Indicator */
-.scroll-indicator {
-    position: absolute;
-    bottom: 60px;
-    left: calc(50% - (35px/2));
-    overflow: hidden;
-    width: 35px;
-    height: 25px;
-}
-.arrow-container {
-    font-family: 'Fira Code', monospace;
-    text-align: center;
-    margin-top: -4px;
-    height: 27px;
-}
-.arrow-container.down {
-    animation: arrowAnimationDown 5s linear infinite;
-}
-.arrow-container.up {
-    animation: arrowAnimationUp 5s linear infinite;
-}
-.arrow {
-    color: var(--accent);
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-.arrow.down {
-    transform: rotate(90deg);
-}
-.arrow.up {
-    transform: rotate(-90deg);
-}
-
-/* Loading screen */
-.loader-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--background);
-    height: 100vh;
-    width: 100vw;
-    font-family: 'Roboto Mono', monospace;
-    transition: background-color 0.7s, color 0.7s;
-}
-.loader{
-    position: fixed;
-    display: flex;
-    align-items: center;
-    left: calc(50% - (256.44px / 2));
-    padding: 0 10px;
-}
-.loader h1,
-.loader p {
-    font-weight: 200;
-    font-size: 1rem;
-    color: var(--text);
-}
-.loader h1 {
-    margin-right: 6px;
-    height: 26px;
-}
-
-/* Loader typing efect large screen*/
-.typingContainer1{
-    position: relative;
-    display: inline-block;
-}
-.typingContent1{
-    position: relative;
-    display: inline-block;
-    animation: typing 1s steps(8); /*Jumlah huruf konten*/
-    white-space: nowrap;
-    overflow: hidden;
-}
-.typingContainer1::before{
-    content: '';
-    position: absolute;
-    bottom: 2px;
-    right: -10px;
-    width: 10px;
-    height: 2px;
-    background-color: var(--accent);
-    animation: blinkCursor .5s steps(3) infinite;
-}
-@keyframes blinkCursor {
-    0%,75%{
-        opacity: 1;
-    }
-    76%,100%{
-        opacity: 0;
-    } 
-}
-@keyframes typing {
-    0%{
-        width: 0;
-    }
-    100%{
-        width: 76.81px; /*Panjang konten*/
-    }
-    
-}
-
-
-
-/* SVG */
-
-/***************************************************
- * Generated by SVG Artista on 1/21/2024, 1:46:07 PM
- * MIT license (https://opensource.org/licenses/MIT)
- * W. https://svgartista.net
- **************************************************/
-
-@-webkit-keyframes animate-svg-stroke-1 {
-0% {
-    stroke-dashoffset: 387.8345947265625px;
-    stroke-dasharray: 387.8345947265625px;
-}
-
-100% {
-    stroke-dashoffset: 0;
-    stroke-dasharray: 387.8345947265625px;
-}
-}
-
-@keyframes animate-svg-stroke-1 {
-0% {
-    stroke-dashoffset: 387.8345947265625px;
-    stroke-dasharray: 387.8345947265625px;
-}
-
-100% {
-    stroke-dashoffset: 0;
-    stroke-dasharray: 387.8345947265625px;
-}
-}
-
-@-webkit-keyframes animate-svg-fill-1 {
-0% {
-    fill: transparent;
-}
-
-100% {
-    /* fill: rgb(255, 255, 255); */
-    fill: var(--text);
-}
-}
-
-@keyframes animate-svg-fill-1 {
-0% {
-    fill: transparent;
-}
-
-100% {
-    /* fill: rgb(255, 255, 255); */
-    fill: var(--text);
-}
-}
-
-.svg-elem-1 {
--webkit-animation: animate-svg-stroke-1 10s cubic-bezier(0.47, 0, 0.745, 0.715) 0s both,
-                        animate-svg-fill-1 7s cubic-bezier(0.47, 0, 0.745, 0.715) 8s both;
-        animation: animate-svg-stroke-1 10s cubic-bezier(0.47, 0, 0.745, 0.715) 0s both,
-                animate-svg-fill-1 7s cubic-bezier(0.47, 0, 0.745, 0.715) 8s both;
-}
-
-#svg1 path {
-    stroke: var(--text); /* Ganti dengan warna stroke yang diinginkan */
-}
-
-@-webkit-keyframes animate-svg-stroke-2 {
-0% {
-    stroke-dashoffset: 655.2581176757812px;
-    stroke-dasharray: 655.2581176757812px;
-}
-
-100% {
-    stroke-dashoffset: 0;
-    stroke-dasharray: 655.2581176757812px;
-}
-}
-
-@keyframes animate-svg-stroke-2 {
-0% {
-    stroke-dashoffset: 655.2581176757812px;
-    stroke-dasharray: 655.2581176757812px;
-}
-
-100% {
-    stroke-dashoffset: 0;
-    stroke-dasharray: 655.2581176757812px;
-}
-}
-
-@-webkit-keyframes animate-svg-fill-2 {
-0% {
-    fill: transparent;
-}
-
-100% {
-    /* fill: rgb(255, 255, 255); */
-    fill: var(--text);
-}
-}
-
-@keyframes animate-svg-fill-2 {
-0% {
-    fill: transparent;
-}
-
-100% {
-    /* fill: rgb(255, 255, 255); */
-    fill: var(--text);
-}
-}
-
-.svg-elem-2 {
--webkit-animation: animate-svg-stroke-2 10s cubic-bezier(0.47, 0, 0.745, 0.715) 0.12s both,
-                        animate-svg-fill-2 7s cubic-bezier(0.47, 0, 0.745, 0.715) 8s both;
-        animation: animate-svg-stroke-2 10s cubic-bezier(0.47, 0, 0.745, 0.715) 0.12s both,
-                animate-svg-fill-2 7s cubic-bezier(0.47, 0, 0.745, 0.715) 8s both;
-}
-
-.dark-mode .svg-elem-1 path {
-    stroke: var(--text);
-    fill: var(--text); /* Jangan lupa tambahkan fill jika diperlukan */
-}
-
-/* Dark mode styles */
-.svg-elem-1 path {
-    stroke: var(--background);
-    fill: var(--background); /* Jangan lupa tambahkan fill jika diperlukan */
-}
-
-.svg-elem-menu {
-    stroke: var(--accent-menu);
-    stroke-width: 1;
-}
-
-
-/* Contact Me */
-#contact a {
-    color: var(--accent);
-    text-decoration: none;
 }
