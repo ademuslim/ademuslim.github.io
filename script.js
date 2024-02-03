@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Fungsi untuk mengubah tampilan SVG setelah 5 detik
+    // Fungsi untuk mengubah tampilan SVG setelah 5 secon
     setTimeout(function() {
         document.getElementById('svg1').style.display = 'none';
         document.getElementById('svg2').style.display = 'block';
