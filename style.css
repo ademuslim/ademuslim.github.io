@@ -30,6 +30,7 @@ html {
     --accent: #ffc800;
     --accent-menu: #0056e0;
     --grey: rgb(64, 64, 64);
+    --dark: #000;
     transition: background-color 0.7s, color 0.7s;
 }
 
