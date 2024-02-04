@@ -6,11 +6,22 @@
     <title>Ade Muslim Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="assets/amfavicon.ico" type="image/x-icon">
-
-    <!-- <link rel="icon" href="geeksforgeeks.org/favicon.gif" type="image/gif" /> -->
+    <script src="index.js" defer type="module"></script>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div id="custom-cursor" class="custom-cursor">
+        <svg viewBox="0 0 12.853553 12.853556" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(-8.9365465,-56.372629)">
+                <g transform="translate(0,3.1032946)">
+                <path d="M 9.4365471,53.769335 21.436547,65.769334" id="path18" />
+                <path d="M 9.4365471,60.769334 V 53.769335 H 16.436547" />
+                </g>
+            </g>
+        </svg>
+    </div>
 
+    <!-- Loading Screen -->
     <div id="loading-screen" class="loader-container">
         <div class="loader">
             <h1>D:\AM Portfolio></h1>
@@ -20,10 +31,11 @@
         </div>
     </div>
 
+    <!-- Content -->
     <div id="content" class="hidden">
         <nav>
             <div class="branding">
-                <a href="#home" class="brand-name" data-fill-text="adeMuslim">
+                <a href="#home" onmouseover="changeCursor()" onmouseout="resetCursor()" class="brand-name hovered-element" data-fill-text="adeMuslim">
                     adeMuslim<span class="dot">.</span>
                 </a>
                 <div class="button">
@@ -43,16 +55,16 @@
 
             <ul id="desktop-menu">
                 <li>
-                    <a href="#home"><span class="link-menu">home</span></a>
+                    <a href="#home" onmouseover="changeCursor()" onmouseout="resetCursor()"><span class="link-menu">home</span></a>
                 </li>
                 <li>
-                    <a href="#work"><span class="link-menu">work</span></a>
+                    <a href="#work" onmouseover="changeCursor()" onmouseout="resetCursor()"><span class="link-menu">work</span></a>
                 </li>
                 <li>
-                    <a href="#contact"><span class="link-menu">contact</span></a>
+                    <a href="#contact" onmouseover="changeCursor()" onmouseout="resetCursor()"><span class="link-menu">contact</span></a>
                 </li>
                 <li>
-                    <a onclick="toggleLightMode()"><span class="link-menu theme-mode">day</span></a>
+                    <a onclick="toggleLightMode()" onmouseover="changeCursor()" onmouseout="resetCursor()"><span class="link-menu theme-mode">day</span></a>
                 </li>
             </ul>
 
@@ -133,7 +145,7 @@
                 </div>
 
                 <div class="block">
-                    <h1>
+                    <h1 class="no-select">
                         <span>A</span><span>de</span>
                         <span>M</span><span>uslim</span>
                     </h1>
@@ -192,6 +204,7 @@
                         <path style="fill-opacity: 1; stroke-width: 0.231231;" d="m 1299.9783,-260.60523 -9.0936,20.42524 -32.441,72.86422 -12.7162,-28.55926 -9.0941,-20.42522 -6.0848,-13.66715 -9.0943,20.42523 9.0943,20.42523 27.8944,62.65234 9.095,-20.42521 -7e-4,-7.2e-4 32.4417,-72.86353 41.5351,93.28946 h 18.1879 l -44.5447,-100.04827 -6.0848,-13.6657 8e-4,-0.001 z" id="path4" class="svg-elem-2"></path>
                     </g>
                 </svg>
+
                 <div class="svg2" data-tilt>
                     <svg width="100%" height="100%" id="svg2" viewBox="0 0 202.87326 134.70913" version="1.1" inkscape:version="1.3 (0e150ed6c4, 2023-07-21)" sodipodi:docname="amlogo.svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
                         <sodipodi:namedview id="namedview1" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" inkscape:document-units="mm" inkscape:zoom="0.73851711" inkscape:cx="1147.5699" inkscape:cy="924.1492" inkscape:window-width="1920" inkscape:window-height="1046" inkscape:window-x="-11" inkscape:window-y="-11" inkscape:window-maximized="1" inkscape:current-layer="layer1"></sodipodi:namedview>
@@ -205,41 +218,67 @@
             </div>
 
             <div class="scroll-indicator">
-                <div class="arrow-container down">
-                    <a class="arrow down" href="#work">-></a>
-                </div>
+                <a class="arrow-down" href="#work">
+                    <svg viewBox="0 0 10.6066 17.677668" xmlns="http://www.w3.org/2000/svg">
+                        <g transform="translate(-43.626275,-70.113707)">
+                            <g transform="rotate(45,24.618105,90.2559)">
+                            <path d="M 9.4365471,53.769335 21.436547,65.769334" />
+                            <path d="M 9.4365471,60.769334 V 53.769335 H 16.436547" />
+                            </g>
+                            <g transform="matrix(0.70710678,-0.70710678,-0.70710678,-0.70710678,80.277588,131.77757)">
+                            <path d="M 9.4365471,53.769335 21.436547,65.769334" />
+                            <path d="M 9.4365471,60.769334 V 53.769335 H 16.436547" />
+                            </g>
+                        </g>
+                    </svg>
+                </a>
             </div>                         
         </section>
     
         <section id="work">
-            <div class="text-container">
-                <h1>
-                    My<br>Work
-                </h1>
+            <h1>
+                My work
+            </h1>
+            <div class="work-content">
                 <p class="animated-background">
-                    I'm developing my skills as a front-end developer. My projects focus on the basics, contributing to the journey of skill development in web development. The goal is to enhance my abilities to become a more experienced front-end developer.
+                    Currently, my projects are still simple or basic. I am developing my skills as a full-stack developer, continually learning to contribute to the journey of skill development with the hope of becoming a more experienced full-stack developer.
                 </p>
             </div>
-            <div class="img-container">
-                <img src="assets/load.gif" alt="Waiting Gif">
-            </div>
+
+            <!-- Dino Game -->
+            <canvas style="width: 100%; background-color: black;" id="game"></canvas>
         </section>
+
         <section id="contact">
             <h1>Contact</h1>
             <a href="https://github.com/ademuslim" target="_blank">github.com/ademuslim</a>
             <br>
             <a href="https://www.instagram.com/__ademuslim" target="_blank">instagram.com/__ademuslim</a>
 
-            <div class="scroll-indicator">
-                <div class="arrow-container up">
-                    <a class="arrow up" href="#home">-></a>
-                </div>
+            <!-- <div class="scroll-indicator">
+                <a class="arrow-up" href="#home">
+                    <svg viewBox="0 0 10.6066 17.677671" xmlns="http://www.w3.org/2000/svg">
+                        <g transform="translate(-34.37972,-53.013911)">
+                            <g transform="rotate(45,24.618105,90.2559)">
+                            <path d="M 9.4365471,53.769335 21.436547,65.769334" />
+                            <path d="M 9.4365471,60.769334 V 53.769335 H 16.436547" />
+                            </g>
+                            <g transform="matrix(0.70710678,-0.70710678,-0.70710678,-0.70710678,80.277588,131.77757)">
+                            <path d="M 9.4365471,53.769335 21.436547,65.769334" />
+                            <path d="M 9.4365471,60.769334 V 53.769335 H 16.436547" />
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+            </div> -->
+
+            <div class="btn-container">
+                <a class="btn-up" href="#home">PgUp</a>
             </div>
         </section>
     </div>
 
     <script src="script.js"></script>
     <script src="vanilla-tilt.js"></script>
-
 </body>
 </html>

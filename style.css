@@ -9,7 +9,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    scrollbar-width: thin;
 }
 
 body, html {
@@ -51,10 +50,36 @@ body {
     overflow-x: hidden; 
     font-family: 'Roboto Mono', monospace;
     transition: background-color 0.7s, color 0.7s;
+    cursor: none; /* Menonaktifkan kursor bawaan */
+}
+
+.custom-cursor {
+    width: 20px; /* Sesuaikan dengan lebar SVG kursor */
+    height: 20px; /* Sesuaikan dengan tinggi SVG kursor */
+    position: fixed;
+    pointer-events: none; /* Mencegah elemen ini menghalangi elemen-elemen di bawahnya */
+    z-index: 2000;
+    transition: transform 0.3s ease;
+    stroke: var(--accent); /* Gunakan variabel CSS untuk warna */
+    stroke-width: 1.2px;
+    fill: none;
+    cursor: none;
+}
+
+#custom-cursor.hover {
+    transform: rotate(45deg);
+}
+
+a:hover {
+    cursor: none;
 }
 
 .hidden {
     display: none;
+}
+
+.no-select {
+    user-select: none;
 }
 
 ::selection {
@@ -273,10 +298,6 @@ nav .branding a .dot {
 .theme-mode::after {
     color: var(--grey);
     font-family: 'Fira Code', monospace;
-}
-
-.theme-mode {
-    cursor: pointer;
 }
 
 #desktop-menu li a {
@@ -592,44 +613,36 @@ h1 span:nth-child(4) {
 /* Ccroll Indicator */
 .scroll-indicator {
     position: absolute;
-    bottom: 60px;
+    bottom: 30px;
     left: calc(50% - (35px/2));
     overflow: hidden;
-    width: 35px;
-    height: 25px;
+    width: 20px;
+    height: 28px;
 }
 
-.arrow-container {
-    font-family: 'Fira Code', monospace;
-    text-align: center;
-    margin-top: -4px;
-    height: 27px;
+.scroll-indicator a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.arrow-container.down {
+.scroll-indicator svg {
+    stroke: var(--accent);
+    fill: none;
+    stroke-width: 1.2px;
+    width: 80%;
+}
+
+.arrow-down svg {
     animation: arrowAnimationDown 5s linear infinite;
 }
 
-.arrow-container.up {
+.arrow-up svg {
     animation: arrowAnimationUp 5s linear infinite;
 }
-
-.arrow {
-    color: var(--accent);
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-.arrow.down {
-    transform: rotate(90deg);
-}
-
-.arrow.up {
-    transform: rotate(-90deg);
-}
-
 
 
 
@@ -771,28 +784,12 @@ h1 span:nth-child(4) {
 
 
 /* Work section */
-#work .text-container {
-    width: 100% !important;
-}
-
 #work {
-    display: flex;
-    justify-content: space-between;
-}
-
-#work .text-container {
-    width: 60%;
-}
-
-#work .img-container {
-    width: 40%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.img-container img {
     width: 100%;
+}
+
+#board {
+    border-bottom: 1px solid var(--text);
 }
 
 .animated-background {
@@ -831,6 +828,42 @@ h1 span:nth-child(4) {
     text-decoration: none;
 }
 
+.btn-container {
+    position: absolute;
+    bottom: 30px;
+    right: 50px;
+    width: 60px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    background-color: var(--grey);
+}
+
+.btn-up {
+    width: 55px;
+    height: 65px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--text);
+}
+
+.btn-up {
+    font-size: .9rem;
+    color: var(--background) !important;
+}
+
+.btn-up:hover {
+    font-weight: 600;
+}
+
+.btn-up:hover {
+    transform: scale(0.98);
+}
+
 
 
 /* Menyembunyikan elemen di layar besar*/
@@ -851,7 +884,8 @@ h1 span:nth-child(4) {
 @media (max-width: 767px) {
     
     /* Menyembunyikan elemen di layar kecil */
-    #desktop-menu {
+    #desktop-menu,
+    #custom-cursor {
         display: none;
     }
 
@@ -864,7 +898,7 @@ h1 span:nth-child(4) {
         position: relative;
         display: flex;
         flex-direction: column;
-        padding: 12px;
+        padding: 12px 20px;
         max-height: 60px;
         overflow: hidden;
         transition: max-height 1s ease; /* Menambahkan transition pada max-height */
@@ -906,7 +940,6 @@ h1 span:nth-child(4) {
     .button {
         display: flex; /* Default: hide on large screens */
         box-sizing: border-box;
-        cursor: pointer;
         z-index: 99;
         svg {
             stroke: var(--text);
@@ -1046,7 +1079,7 @@ h1 span:nth-child(4) {
     }
 
     section {
-        padding: 70px 10px 10px !important;
+        padding: 70px 20px 10px !important;
     }
 
     .intro {
@@ -1241,15 +1274,10 @@ h1 span:nth-child(4) {
     .logo {
         align-items: flex-start !important;
     }
+}
 
-    #work .img-container {
-        width: 20% !important;
-        position: absolute;
-        top: 100px;
-        right: 0;
-    }
-
-    .img-container img {
-        max-width: 60% !important; /* Menghindari gambar melebihi lebar kontainer */
-    }
+#game {
+    width: 100%;
+    background-color: #151515; /* Warna latar belakang canvas */
+    color: red; /* Warna teks */
 }

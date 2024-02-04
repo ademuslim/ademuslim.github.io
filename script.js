@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', function () {
         const distanceFromTop = window.scrollY;
 
-        if (distanceFromTop >= 350) {
+        if (distanceFromTop >= 500) {
             nav.classList.add('sticky');
         } else {
             nav.classList.remove('sticky');
@@ -101,6 +101,20 @@ button.addEventListener('click', () => {
     nav.classList.toggle('-mobile-menu-open', button.classList.contains('-mobile-menu-open'));
 });
 
+const customCursor = document.getElementById('custom-cursor');
+
+document.addEventListener('mousemove', (e) => {
+    customCursor.style.left = `${e.clientX}px`;
+    customCursor.style.top = `${e.clientY}px`;
+});
+
+function changeCursor() {
+    document.getElementById('custom-cursor').classList.add('hover');
+}
+
+function resetCursor() {
+    document.getElementById('custom-cursor').classList.remove('hover');
+}
 
 
 
